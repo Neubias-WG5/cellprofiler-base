@@ -26,5 +26,3 @@ RUN git clone https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
 RUN git checkout 2.2.0
 RUN pip install --editable .
-
-ENTRYPOINT ["cellprofiler", "-c", "-r", "-b", "--do-not-fetch"]
