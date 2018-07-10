@@ -21,8 +21,8 @@ RUN apt-get update -y   && \
         python-wxgtk3.0    \
         python-zmq
 
-WORKDIR /usr/local/src
+WORKDIR /
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
-WORKDIR /usr/local/src/CellProfiler
+WORKDIR /CellProfiler
 RUN git checkout 2.2.0
 RUN pip install --editable .
