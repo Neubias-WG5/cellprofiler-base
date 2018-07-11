@@ -23,6 +23,8 @@ RUN apt-get update -y   && \
         python-wxgtk3.0    \
         python-zmq
 
+#RUN update-alternatives --config java
+
 RUN cd / && git clone https://github.com/CellProfiler/CellProfiler.git
 RUN cd /CellProfiler && git checkout 2.2.0 && pip install --editable .
 
@@ -41,12 +43,16 @@ RUN cd /tmp && \
     wget https://bootstrap.pypa.io/get-pip.py && \
     python3.6 get-pip.py
 
-RUN python3.6 -m pip install requests \
+RUN pip3 install requests \
     requests-toolbelt \
     six \
     future \
     shapely \
-    opencv-python
+    opencv-python \
+    scikit-image \
+    imageio
+
+RUN pip3 install https://github.com/Neubias-WG5/AnnotationExporter/archive/master.zip
 
 RUN cd / && \
     git clone https://github.com/cytomine-uliege/Cytomine-python-client.git && \
