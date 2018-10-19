@@ -21,14 +21,19 @@ RUN apt-get update -y   && \
         python-numpy       \
         python-vigra       \
         python-wxgtk3.0    \
-        python-zmq
+        python-zmq         \
+	python-pytest
 
 #RUN update-alternatives --config java
 
 RUN cd / && git clone https://github.com/CellProfiler/CellProfiler.git
 RUN cd /CellProfiler && git checkout 2.2.0 && pip install --editable .
 
+# Python related conflicts with CellProfiler and NEUBIAS-base
 #FROM neubiaswg5/neubias-base:latest
+# Install requirements directly without neubias-base
+
+
 # Install Cytomine Python client
 RUN apt-get install -y software-properties-common python-software-properties
 
@@ -59,5 +64,14 @@ RUN cd / && \
     cd Cytomine-python-client && \
     python3.6 setup.py build && \
     python3.6 setup.py install
+
+# Install ComputeMetrics
+RUN pip install numba
+RUN pip install git+https://github.com/jni/skan
+RUN git clone https://github.com/Neubias-WG5/ComputeMetrics.git
+RUN chmod +x /ComputeMetrics/bin/*
+RUN cp /ComputeMetrics/bin/* /usr/bin/
+RUN cd /ComputeMetrics/ && pip install .
+RUN rm -r /ComputeMetrics
 
 ENTRYPOINT /bin/sh
