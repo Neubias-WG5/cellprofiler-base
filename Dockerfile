@@ -73,5 +73,3 @@ RUN chmod +x /ComputeMetrics/bin/*
 RUN cp /ComputeMetrics/bin/* /usr/bin/
 RUN cd /ComputeMetrics/ && pip install .
 RUN rm -r /ComputeMetrics
-
-ENTRYPOINT /bin/sh
