@@ -54,8 +54,7 @@ RUN pip3 install requests \
     future \
     shapely \
     opencv-python \
-    scikit-image \
-    imageio
+    scikit-image
 
 RUN pip3 install https://github.com/Neubias-WG5/AnnotationExporter/archive/master.zip
 
@@ -66,10 +65,8 @@ RUN cd / && \
     python3.6 setup.py install
 
 # Install ComputeMetrics
-RUN pip install numba
-RUN pip install git+https://github.com/jni/skan
-RUN git clone https://github.com/Neubias-WG5/ComputeMetrics.git
-RUN chmod +x /ComputeMetrics/bin/*
-RUN cp /ComputeMetrics/bin/* /usr/bin/
-RUN cd /ComputeMetrics/ && pip install .
-RUN rm -r /ComputeMetrics
+RUN git clone https://github.com/Neubias-WG5/neubiaswg5-utilities.git
+RUN chmod +x /neubiaswg5-utilities/bin/*
+RUN cp /neubiaswg5-utilities/bin/* /usr/bin/
+RUN cd /neubiaswg5-utilities/ && pip install .
+RUN rm -r /neubiaswg5-utilities
